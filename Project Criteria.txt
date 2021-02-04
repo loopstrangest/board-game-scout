@@ -1,0 +1,13 @@
+PROJECT:
+Board Game Scout
+A web app to recommend board games based on user inputs.
+
+FEATURES:
+- Provide a ranked list of games most similar to user-selected game(s) and/or mechanic(s), based on matching game mechanics
+- Optionally filter a list based on number of players/play time/price
+- Click any listed game to show a details page with extensive game information
+
+CODE STACK:
+- HTML/CSS
+- JavaScript/React/Redux
+- Board Game Atlas API
