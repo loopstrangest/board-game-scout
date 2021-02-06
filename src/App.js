@@ -1,17 +1,15 @@
 //router
 import { Route } from "react-router-dom";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadGames } from "./actions/gamesAction";
+import React from "react";
+//components and pages
+import Home from "./pages/Home";
+import GlobalStyles from "./components/GlobalStyles";
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadGames());
-  });
   return (
     <div className="App">
-      <h1>App is set up!</h1>
+      <GlobalStyles />
+      <Home />
     </div>
   );
 }
