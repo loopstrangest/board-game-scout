@@ -2,6 +2,7 @@ const initState = {
   popular: [],
   search: [],
   newest: [],
+  autocomplete: [],
 };
 
 const gamesReducer = (state = initState, action) => {
@@ -12,6 +13,16 @@ const gamesReducer = (state = initState, action) => {
         popular: action.payload.popular,
         search: action.payload.search,
         newest: action.payload.newest,
+      };
+    case "FETCH_AUTOCOMPLETE":
+      return {
+        ...state,
+        autocomplete: action.payload.autocomplete,
+      };
+    case "CLEAR_AUTOCOMPLETE":
+      return {
+        ...state,
+        autocomplete: [],
       };
     default:
       return { ...state };

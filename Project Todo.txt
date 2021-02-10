@@ -1,0 +1,11 @@
+Autocomplete + Search:
+- Add clicked game from autocomplete list to search list
+- Fetch searched game's game mechanics on submit search
+- Fetch and order the most similar games based on number matching mechanics
+- Display results
+
+~*~*~*~*~*~*~
+
+02.10.21:
+- Fetched autocomplete games with every change to input search string
+- Displayed autocomplete games list

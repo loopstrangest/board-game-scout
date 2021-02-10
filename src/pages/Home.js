@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadGames } from "../actions/gamesAction";
 //components
 import Game from "../components/Game";
+import Search from "../components/Search";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -14,9 +15,12 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { popular, search, newest } = useSelector((state) => state.games);
+  const { popular, search, newest, searched } = useSelector(
+    (state) => state.games
+  );
   return (
     <GameList>
+      <Search />
       <h2>Popular Games</h2>
       <Games>
         {popular.map((game) => (
