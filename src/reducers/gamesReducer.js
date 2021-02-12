@@ -3,6 +3,7 @@ const initState = {
   search: [],
   newest: [],
   autocomplete: [],
+  searchCriteria: [],
 };
 
 const gamesReducer = (state = initState, action) => {
@@ -23,6 +24,13 @@ const gamesReducer = (state = initState, action) => {
       return {
         ...state,
         autocomplete: [],
+      };
+    case "FETCH_SEARCH_CRITERIA":
+      return {
+        ...state,
+        searchCriteria: Array.from(
+          new Set(state.searchCriteria.concat(action.payload.newCriteria))
+        ),
       };
     default:
       return { ...state };

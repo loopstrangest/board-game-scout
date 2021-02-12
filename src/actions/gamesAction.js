@@ -21,12 +21,22 @@ export const loadGames = () => async (dispatch) => {
 };
 
 export const fetchAutocomplete = (game_name) => async (dispatch) => {
+  console.log("fetching autocomplete");
   const autocompleteGames = await axios.get(autocompleteURL(game_name));
 
   dispatch({
     type: "FETCH_AUTOCOMPLETE",
     payload: {
       autocomplete: autocompleteGames.data.games,
+    },
+  });
+};
+
+export const fetchSearchCriteria = (criteria) => async (dispatch) => {
+  dispatch({
+    type: "FETCH_SEARCH_CRITERIA",
+    payload: {
+      newCriteria: criteria,
     },
   });
 };

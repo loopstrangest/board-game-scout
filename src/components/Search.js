@@ -2,45 +2,68 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadGames, fetchAutocomplete } from "../actions/gamesAction";
+import Autocomplete from "../components/Autocomplete";
 
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const Search = () => {
+  var searchInputTimer;
   const dispatch = useDispatch();
-  const [autocompleteInput, setAutocompleteInput] = useState("");
 
-  const inputHandler = (e) => {
+  const handleKeyUp = (e) => {
+    clearTimeout(searchInputTimer);
+    searchInputTimer = setTimeout(function () {
+      inputHandler(e);
+    }, 250);
+  };
+
+  function inputHandler(e) {
+    console.log("value is", e.target.value);
     if (e.target.value == "") {
       dispatch({ type: "CLEAR_AUTOCOMPLETE" });
     } else {
       dispatch(fetchAutocomplete(e.target.value));
     }
-    setAutocompleteInput(e.target.value);
-  };
+  }
 
   const submitSearch = (e) => {
-    //e.preventDefault();
-    //dispatch(fetchAutocomplete(searchInput));
-    //setSearchInput("");
+    console.log("submitted search");
   };
+
   //fetch games
   useEffect(() => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { autocomplete } = useSelector((state) => state.games);
-  //LOCKED OTHER GOOD VERSION
+  const { autocomplete, searchCriteria } = useSelector((state) => state.games);
+
   return (
     <StyledSearch>
-      <input type="search" value={autocompleteInput} onChange={inputHandler} />
-      <input type="submit" value="Search!" onClick={submitSearch}></input>
+      <div class="searchInfo">
+        <input id="gameSearch" type="search" onKeyUp={handleKeyUp} />
+        <input type="submit" value="Search!" onClick={submitSearch}></input>
+        {searchCriteria.length ? (
+          <div class="searchCriteria">
+            {/* {searchCriteria.map((game) => (
+              <p>placeholder</p>
+            ))} */}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
 
       {autocomplete.length ? (
         <div>
           {autocomplete.map((game) => (
-            <p key={game.id}>{game.name} </p>
+            <Autocomplete
+              name={game.name}
+              id={game.id}
+              image={game.image_url}
+              key={game.id}
+            />
           ))}
         </div>
       ) : (
@@ -52,18 +75,11 @@ const Search = () => {
 
 const StyledSearch = styled(motion.div)`
   padding-top: 2rem;
+  .searchInfo,
+  .searchCriteria {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
-/*
-//LOCKED GOOD VERSION
-const Search = () => {
-  return (
-    <StyledSearch>
-      <input type="search"></input>
-
-      <input type="submit" value="Search!"></input>
-    </StyledSearch>
-  );
-};
-*/
 export default Search;
