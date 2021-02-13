@@ -15,12 +15,39 @@ const Home = () => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { popular, search, newest, searched } = useSelector(
+  const { popular, searchCriteria, searchResults } = useSelector(
     (state) => state.games
   );
   return (
     <GameList>
+      <h1>Board Game Scout</h1>
       <Search />
+      {searchResults.length ? (
+        <div>
+          <h2>Search Results</h2>
+          <h4>
+            <p>Games Like:</p>
+            {searchCriteria.map((game) => {
+              return <p class="criteriaName">{game.name}</p>;
+            })}
+          </h4>
+          <Games>
+            {searchResults.map((game) => {
+              return (
+                <Game
+                  name={game.name}
+                  year={game.year_published}
+                  id={game.id}
+                  image={game.image_url}
+                  key={game.id}
+                />
+              );
+            })}
+          </Games>
+        </div>
+      ) : (
+        ""
+      )}
       <h2>Popular Games</h2>
       <Games>
         {popular.map((game) => (
@@ -40,10 +67,20 @@ const Home = () => {
 const GameList = styled(motion.div)`
   padding: 0rem 5rem;
   h2 {
-    padding: 5rem 0rem;
+    padding-top: 5rem;
+  }
+  h4 {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+  }
+  .criteriaName {
+    padding-left: 1rem;
+    margin-top: 0;
   }
 `;
 const Games = styled(motion.div)`
+  padding-top: 2rem;
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

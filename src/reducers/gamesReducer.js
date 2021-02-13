@@ -1,10 +1,41 @@
+import { fetchMatchingGames } from "../reducers/searchReducer";
+
 const initState = {
   popular: [],
-  search: [],
-  newest: [],
   autocomplete: [],
   searchCriteria: [],
+  searchResults: [],
 };
+
+function checkNewCriteriaIsUnique(searchCriteria, newCriteria) {
+  var isNewCriteria = true;
+  searchCriteria.forEach(function (item) {
+    if (newCriteria.id === item.id) {
+      isNewCriteria = false;
+    }
+  });
+  return isNewCriteria ? searchCriteria.concat(newCriteria) : searchCriteria;
+}
+
+function removeSearchCriteriaFromSearchResults(searchCriteria, searchResults) {
+  searchCriteria.forEach(function (criteria) {
+    searchResults.forEach(function (result, index) {
+      if (result.id === criteria.id) {
+        searchResults.splice(index, 1);
+      }
+    });
+  });
+  return searchResults;
+}
+
+function deleteSearchCriteria(searchCriteria, removeCriteria) {
+  searchCriteria.forEach(function (item, index) {
+    if (removeCriteria.id === item.id) {
+      searchCriteria.splice(index, 1);
+    }
+  });
+  return searchCriteria;
+}
 
 const gamesReducer = (state = initState, action) => {
   switch (action.type) {
@@ -12,7 +43,6 @@ const gamesReducer = (state = initState, action) => {
       return {
         ...state,
         popular: action.payload.popular,
-        search: action.payload.search,
         newest: action.payload.newest,
       };
     case "FETCH_AUTOCOMPLETE":
@@ -25,11 +55,28 @@ const gamesReducer = (state = initState, action) => {
         ...state,
         autocomplete: [],
       };
-    case "FETCH_SEARCH_CRITERIA":
+    case "ADD_GAME_TO_SEARCH_CRITERIA":
       return {
         ...state,
-        searchCriteria: Array.from(
-          new Set(state.searchCriteria.concat(action.payload.newCriteria))
+        searchCriteria: checkNewCriteriaIsUnique(
+          state.searchCriteria,
+          action.payload.newCriteria
+        ),
+      };
+    case "REMOVE_GAME_FROM_SEARCH_CRITERIA":
+      return {
+        ...state,
+        searchCriteria: deleteSearchCriteria(
+          state.searchCriteria,
+          action.payload.removeCriteria
+        ),
+      };
+    case "FETCH_SEARCH":
+      return {
+        ...state,
+        searchResults: removeSearchCriteriaFromSearchResults(
+          state.searchCriteria,
+          action.payload.searchResults
         ),
       };
     default:

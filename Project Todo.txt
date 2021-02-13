@@ -1,7 +1,7 @@
-Autocomplete + Search:
-- Add additional game data to searchCriteria state
-- Fetch and order games most similar to searchCriteria games based on number matching mechanics
-- Display results
+Search:
+- Revise Autocomplete to include game mechanics
+- Revise SearchCriteria to include game mechanics
+- Revise fetchURLSearchParameters to handle games and/or mechanics as input
 
 ~*~*~*~*~*~*~
 
@@ -15,3 +15,11 @@ Autocomplete + Search:
 - Cleared autocomplete list and search value on autocomplete click
 - Added timeout to search input so that every intermediate string isn't searched
 - Added clicked autocomplete games to 'searchCriteria' state
+
+02.12.21:
+- Added clicked autocomplete game data to searchCriteria only when the game is not already in searchCriteria
+- Created SearchCriteria component to display each searchCriteria
+- Added button to each SearchCriteria to remove it from searchCriteria state
+- Styled SearchCriteria
+- Wrote a basic function to get an API-compliant list of game mechanics from searchCriteria
+- Set up dispatch to fetch searchResults using game mechanics list

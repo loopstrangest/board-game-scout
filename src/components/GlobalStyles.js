@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Europa', sans-serif;
 }
 html{
     &::-webkit-scrollbar{
@@ -15,17 +16,22 @@ html{
     }
 }
 body{
-    font-family: 'Europa', sans-serif;
     width: 100%;
 }
-h2{
+h1{
     font-size: 3rem;
+    color: #333;
+    padding-top: 1rem;
+}
+h2{
+    font-size: 2rem;
     color: #333;
 }
 h3{
     font-size: 1.3rem;
     color: #333;
-    padding: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1.5rem;
 }
 p{
     font-size: 1.2rem;

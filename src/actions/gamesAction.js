@@ -1,5 +1,6 @@
 import axios from "axios";
-import { popularURL, searchURL, newestURL, autocompleteURL } from "../api";
+import { popularURL, searchURL, autocompleteURL } from "../api";
+import { fetchURLSearchParameters } from "../reducers/searchReducer";
 
 //Action Creator
 
@@ -7,15 +8,11 @@ import { popularURL, searchURL, newestURL, autocompleteURL } from "../api";
 export const loadGames = () => async (dispatch) => {
   //fetch axios
   const popularData = await axios.get(popularURL());
-  const searchData = await axios.get(searchURL());
-  const newestData = await axios.get(newestURL());
 
   dispatch({
     type: "FETCH_GAMES",
     payload: {
       popular: popularData.data.games,
-      search: searchData.data.games,
-      newest: newestData.data.games,
     },
   });
 };
@@ -32,11 +29,34 @@ export const fetchAutocomplete = (game_name) => async (dispatch) => {
   });
 };
 
-export const fetchSearchCriteria = (criteria) => async (dispatch) => {
+export const addGameToSearchCriteria = (criteria) => async (dispatch) => {
   dispatch({
-    type: "FETCH_SEARCH_CRITERIA",
+    type: "ADD_GAME_TO_SEARCH_CRITERIA",
     payload: {
       newCriteria: criteria,
+    },
+  });
+};
+
+export const removeGameFromSearchCriteria = (criteria) => async (dispatch) => {
+  dispatch({
+    type: "REMOVE_GAME_FROM_SEARCH_CRITERIA",
+    payload: {
+      removeCriteria: criteria,
+    },
+  });
+};
+
+export const fetchSearch = (searchCriteria) => async (dispatch) => {
+  console.log("fetching search ");
+  const searchResults = await axios.get(
+    searchURL(fetchURLSearchParameters(searchCriteria))
+  );
+
+  dispatch({
+    type: "FETCH_SEARCH",
+    payload: {
+      searchResults: searchResults.data.games,
     },
   });
 };
