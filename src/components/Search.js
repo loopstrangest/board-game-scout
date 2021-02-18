@@ -8,6 +8,7 @@ import {
 } from "../actions/gamesAction";
 import Autocomplete from "../components/Autocomplete";
 import SearchCriteria from "../components/SearchCriteria";
+import Loading from "../components/Loading";
 
 //styling and animation
 import styled from "styled-components";
@@ -42,32 +43,34 @@ const Search = () => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { autocomplete, searchCriteria } = useSelector((state) => state.games);
+  const { autocomplete, searchCriteria, loadingSearchResults } = useSelector(
+    (state) => state.games
+  );
 
   return (
     <StyledSearch>
       <div class="searchInfo">
         <label for="gameSearch">Find Games Like: </label>
         <input id="gameSearch" type="search" onKeyUp={handleKeyUp} />
-        {searchCriteria.length ? (
-          <div class="searchCriteria">
-            {searchCriteria.map((game) => (
-              <SearchCriteria
-                game={game}
-                name={game.name}
-                id={game.id}
-                key={game.id}
-              />
-            ))}
-            <button class="searchButton" onClick={clickSearch}>
-              Search!
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
-
+      {searchCriteria.length ? (
+        <SearchElements>
+          {searchCriteria.map((game) => (
+            <SearchCriteria
+              game={game}
+              name={game.name}
+              id={game.id}
+              key={game.id}
+            />
+          ))}
+          <button class="searchButton" onClick={clickSearch}>
+            Search!
+          </button>
+        </SearchElements>
+      ) : (
+        ""
+      )}
+      {loadingSearchResults ? <Loading /> : ""}
       {autocomplete.length ? (
         <div>
           {autocomplete.map((game) => {
@@ -94,14 +97,11 @@ const StyledSearch = styled(motion.div)`
     font-size: 20px;
   }
   padding-top: 2rem;
-  .searchInfo,
-  .searchCriteria {
+  .searchInfo {
+    justify-content: center;
     display: flex;
     margin-bottom: 0.25rem;
     flex-direction: row;
-  }
-  .searchInfo {
-    height: 50px;
   }
   label,
   input {
@@ -109,18 +109,25 @@ const StyledSearch = styled(motion.div)`
     margin-top: auto;
     margin-bottom: auto;
   }
+`;
+
+const SearchElements = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+  flex-direction: row;
   button {
-    height: 75%;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid white;
-    margin-left: 0.5rem;
     margin-top: auto;
     margin-bottom: auto;
     background: none;
     cursor: pointer;
   }
   .searchButton {
+    margin: 0.25rem;
     border: 1px solid lightblue;
   }
   .searchButton:hover {

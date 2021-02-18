@@ -1,9 +1,8 @@
-import { fetchMatchingGames } from "../reducers/searchReducer";
-
 const initState = {
   popular: [],
   autocomplete: [],
   searchCriteria: [],
+  loadingSearchResults: false,
   searchResults: [],
 };
 
@@ -78,6 +77,12 @@ const gamesReducer = (state = initState, action) => {
           state.searchCriteria,
           action.payload.searchResults
         ),
+        loadingSearchResults: action.payload.loadingSearchResults,
+      };
+    case "LOADING_SEARCH_RESULTS":
+      return {
+        ...state,
+        loadingSearchResults: action.payload.loadingSearchResults,
       };
     default:
       return { ...state };

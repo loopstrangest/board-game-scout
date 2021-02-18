@@ -11,8 +11,6 @@ const mechanics_test_param = "mechanics=vZsDDAdOoe";
 
 const popular_url =
   base_url + search_prefix + order_full_param + client_full_param;
-const search_url =
-  base_url + search_prefix + mechanics_test_param + client_full_param;
 
 export const popularURL = () => popular_url;
 export const searchURL = (mechanics) =>

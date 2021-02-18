@@ -37,6 +37,7 @@ const Autocomplete = ({ game, name, image }) => {
 
 const StyledAutocomplete = styled(motion.div)`
   display: flex;
+  justify-content: left;
   cursor: pointer;
   padding: 3px 1em 3px 0.4em;
   min-width: 200px;

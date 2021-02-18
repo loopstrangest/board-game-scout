@@ -28,7 +28,11 @@ const Home = () => {
           <h4>
             <p>Games Like:</p>
             {searchCriteria.map((game) => {
-              return <p class="criteriaName">{game.name}</p>;
+              return (
+                <p key={game.name} class="criteriaName">
+                  {game.name}
+                </p>
+              );
             })}
           </h4>
           <Games>

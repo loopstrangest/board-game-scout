@@ -23,12 +23,19 @@ const SearchCriteria = ({ game, name, image }) => {
 const StyledSearchCriteria = styled(motion.div)`
   display: flex;
   justify-content: space-between;
-  margin-right: 0.5rem;
+  margin: 0.25rem;
   background-color: lightblue;
   border-radius: 5px;
   padding: 0px 5px;
   p {
     margin: auto;
+    margin-right: 0.25rem;
+  }
+  button {
+    padding: 0px 5px;
+    height: 75%;
+    display: table-cell;
+    text-align: center;
   }
   button:hover {
     background-color: white;
