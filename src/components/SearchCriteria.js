@@ -32,10 +32,11 @@ const StyledSearchCriteria = styled(motion.div)`
     margin-right: 0.25rem;
   }
   button {
-    padding: 0px 5px;
     height: 75%;
-    display: table-cell;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
   }
   button:hover {
     background-color: white;

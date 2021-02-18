@@ -1,6 +1,6 @@
 import axios from "axios";
 import { popularURL, autocompleteURL } from "../api";
-import { evaluateAllGames } from "../reducers/searchReducer";
+import { evaluateAllGames } from "../actions/evaluateGames";
 
 //Load games by default
 export const loadGames = () => async (dispatch) => {

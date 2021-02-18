@@ -96,23 +96,27 @@ const StyledSearch = styled(motion.div)`
   * {
     font-size: 20px;
   }
+
   padding-top: 2rem;
   .searchInfo {
-    justify-content: center;
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 0.25rem;
     flex-direction: row;
   }
-  label,
-  input {
+  label {
+    text-align: right;
     margin-right: 0.5rem;
-    margin-top: auto;
-    margin-bottom: auto;
   }
 `;
 
 const SearchElements = styled(motion.div)`
   display: flex;
+  * {
+    font-size: 20px;
+  }
+
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 0.25rem;

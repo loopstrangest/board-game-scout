@@ -35,7 +35,6 @@ h3{
 }
 p{
     font-size: 1.2rem;
-    line-height: 200%;
 }
 a{
     text-decoration: none;

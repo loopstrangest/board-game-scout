@@ -40,6 +40,8 @@ const StyledAutocomplete = styled(motion.div)`
   justify-content: left;
   cursor: pointer;
   padding: 3px 1em 3px 0.4em;
+  padding-top: auto;
+  padding-bottom: auto;
   min-width: 200px;
 
   .image-container {
@@ -55,6 +57,8 @@ const StyledAutocomplete = styled(motion.div)`
     object-fit: contain;
   }
   p {
+    display: flex;
+    align-items: center;
     pointer-events: none;
   }
 `;
