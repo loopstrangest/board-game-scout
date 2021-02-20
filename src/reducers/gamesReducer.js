@@ -50,6 +50,7 @@ const gamesReducer = (state = initState, action) => {
       return {
         ...state,
         autocomplete: action.payload.autocomplete,
+        loadingSearchResults: action.payload.loadingSearchResults,
       };
     case "CLEAR_AUTOCOMPLETE":
       return {
@@ -75,13 +76,17 @@ const gamesReducer = (state = initState, action) => {
     case "FETCH_SEARCH":
       return {
         ...state,
-        searchCriteriaDisplay: action.payload.searchCriteriaDisplay,
         searchResults: removeSearchCriteriaFromSearchResults(
-          state.searchCriteria,
+          state.searchCriteriaDisplay,
           action.payload.searchResults
         ),
         numSearchMechanics: action.payload.numSearchMechanics,
         loadingSearchResults: action.payload.loadingSearchResults,
+      };
+    case "UPDATE_SEARCH_CRITERIA_DISPLAY":
+      return {
+        ...state,
+        searchCriteriaDisplay: action.payload.searchCriteriaDisplay,
       };
     case "LOADING_SEARCH_RESULTS":
       return {

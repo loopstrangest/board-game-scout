@@ -26,11 +26,10 @@ const Search = () => {
   };
 
   function inputHandler(e) {
-    console.log("value is", e.target.value);
     if (e.target.value === "") {
       dispatch({ type: "CLEAR_AUTOCOMPLETE" });
     } else {
-      dispatch(fetchAutocomplete(e.target.value));
+      dispatch(fetchAutocomplete(e.target.value.toLowerCase()));
     }
   }
 
@@ -50,7 +49,7 @@ const Search = () => {
   return (
     <StyledSearch>
       <div class="searchInfo">
-        <label for="gameSearch">Find Games Like: </label>
+        <label for="gameSearch">Games and Mechanics: </label>
         <input id="gameSearch" type="search" onKeyUp={handleKeyUp} />
       </div>
       {searchCriteria.length ? (
@@ -72,10 +71,11 @@ const Search = () => {
       )}
       {loadingSearchResults ? <Loading /> : ""}
       {autocomplete.length ? (
-        <div>
+        <AutocompleteList>
           {autocomplete.map((game) => {
             return (
               <Autocomplete
+                type={game.type}
                 game={game}
                 name={game.name}
                 id={game.id}
@@ -84,7 +84,7 @@ const Search = () => {
               />
             );
           })}
-        </div>
+        </AutocompleteList>
       ) : (
         ""
       )}
@@ -137,6 +137,15 @@ const SearchElements = styled(motion.div)`
   .searchButton:hover {
     background-color: lightblue;
   }
+`;
+
+const AutocompleteList = styled(motion.div)`
+  border: 1px solid lightblue;
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  display: block;
+  z-index: 1;
 `;
 
 export default Search;

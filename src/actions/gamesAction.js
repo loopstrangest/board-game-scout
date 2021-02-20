@@ -1,14 +1,11 @@
 import axios from "axios";
-import { popularURL, autocompleteURL } from "../api";
+import { popularURL, autocompleteURL, allMechanicsURL } from "../api";
 import { fetchGamesFromSearchCriteria } from "../actions/fetchSearchResults";
 
 //Load games by default
 export const loadGames = () => async (dispatch) => {
   //fetch axios
   const popularData = await axios.get(popularURL());
-  console.log("popularData in state is:");
-  console.log(popularData.data.games);
-
   dispatch({
     type: "FETCH_GAMES",
     payload: {
@@ -17,14 +14,39 @@ export const loadGames = () => async (dispatch) => {
   });
 };
 
-export const fetchAutocomplete = (game_name) => async (dispatch) => {
-  console.log("fetching autocomplete");
-  const autocompleteGames = await axios.get(autocompleteURL(game_name));
+export const fetchAutocomplete = (search_string) => async (dispatch) => {
+  dispatch({ type: "CLEAR_AUTOCOMPLETE" });
+  dispatch({
+    type: "LOADING_SEARCH_RESULTS",
+    payload: {
+      loadingSearchResults: true,
+    },
+  });
+
+  const autocompleteGames = await axios.get(autocompleteURL(search_string));
+  const autocompleteMechanics = await axios.get(allMechanicsURL());
+
+  //Format mechanics for autocomplete display
+  var filteredMechanics = autocompleteMechanics.data.mechanics.filter(
+    (mechanic) => mechanic.name.toLowerCase().includes(search_string)
+  );
+  filteredMechanics =
+    filteredMechanics.length > 2
+      ? filteredMechanics.slice(0, 2)
+      : filteredMechanics;
+  filteredMechanics.forEach((mechanic) => {
+    mechanic.type = "mechanic";
+  });
+
+  const combinedAutocompleteResults = filteredMechanics.concat(
+    autocompleteGames.data.games
+  );
 
   dispatch({
     type: "FETCH_AUTOCOMPLETE",
     payload: {
-      autocomplete: autocompleteGames.data.games,
+      autocomplete: combinedAutocompleteResults,
+      loadingSearchResults: false,
     },
   });
 };
@@ -49,20 +71,27 @@ export const removeGameFromSearchCriteria = (criteria) => async (dispatch) => {
 
 //Triggered by UI search button click
 export const fetchSearch = (searchCriteria) => async (dispatch) => {
+  //Make copy of searchCriteria that is unaffected by user actions
+  const copyOfSearchCriteria = JSON.parse(JSON.stringify(searchCriteria));
   dispatch({
     type: "LOADING_SEARCH_RESULTS",
     payload: {
       loadingSearchResults: true,
     },
   });
-  const search = await fetchGamesFromSearchCriteria(searchCriteria);
-  const searchResults = search[0];
-  const numSearchMechanics = search[1];
+  dispatch({
+    type: "UPDATE_SEARCH_CRITERIA_DISPLAY",
+    payload: {
+      searchCriteriaDisplay: copyOfSearchCriteria,
+    },
+  });
+  const searchData = await fetchGamesFromSearchCriteria(copyOfSearchCriteria);
+  const searchResults = searchData[0];
+  const numSearchMechanics = searchData[1];
 
   dispatch({
     type: "FETCH_SEARCH",
     payload: {
-      searchCriteriaDisplay: JSON.parse(JSON.stringify(searchCriteria)),
       searchResults: searchResults,
       numSearchMechanics: numSearchMechanics,
       loadingSearchResults: false,

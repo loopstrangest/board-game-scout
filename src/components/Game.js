@@ -10,7 +10,7 @@ const Game = ({ name, year, url, image, count, numSearchMechanics }) => {
     <StyledGame onClick={openGamePage}>
       <h3>{name}</h3>
       {numSearchMechanics > 0 ? (
-        <p>{Math.round((count / numSearchMechanics) * 100)}% match</p>
+        <p>{Math.round((count / numSearchMechanics) * 100)}% Match</p>
       ) : (
         ""
       )}

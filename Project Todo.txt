@@ -1,7 +1,9 @@
-Search:
-- Revise Autocomplete to include game mechanics
-- Revise SearchCriteria to include game mechanics
-- Revise fetchSearchResults to handle games and/or mechanics as input
+App:
+- Revise Game data display
+- Add number of players filter
+- Add play time filter
+- Add price filter
+
 
 ~*~*~*~*~*~*~
 
@@ -36,5 +38,7 @@ Search:
 - Separated search criteria listed above search results from searchCriteria state
 - Created SearchResults component
 - Added button to close search results
-- Added Game link to Board Game Atlas page
+- Added link from Game to Board Game Atlas page
 - Added FontAwesome flag icon
+- Revised Autocomplete and SearchCriteria to include game mechanics
+- Revised fetchSearchResults to handle games and/or mechanics as input

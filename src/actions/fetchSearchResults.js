@@ -6,7 +6,6 @@ import { searchURL } from "../api";
 
 //From the games + mechanics listed in searchCriteria, get matching games
 export async function fetchGamesFromSearchCriteria(searchCriteria) {
-  console.log("***start of fetchGamesFromSearchCriteria***");
   var allGames = [];
   var gameResultsArray = [];
   var filteredGames = [];
@@ -15,18 +14,30 @@ export async function fetchGamesFromSearchCriteria(searchCriteria) {
   console.log(searchCriteria);
   //Add every mechanic to allMechanics
   for (var item of searchCriteria) {
-    var mechanics = item.mechanics;
-    for (var mechanic of mechanics) {
-      numSearchMechanics += 1;
-      //Get 100 most popular games with the mechanic
-      console.log("***before games fetch from mechanic***");
-      var mechanicGameResults = await axios.get(searchURL(mechanic.id));
-      console.log("***after games fetch from mechanic***");
-      gameResultsArray = await mechanicGameResults.data.games;
-      //Add each game to an array
-      gameResultsArray.forEach((game) => {
-        allGames.push(game);
-      });
+    switch (item.type) {
+      case "mechanic":
+        //handle mechanic input
+        numSearchMechanics += 1;
+        var mechanicGameResults = await axios.get(searchURL(item.id));
+        gameResultsArray = await mechanicGameResults.data.games;
+        //Add each game to an array
+        gameResultsArray.forEach((game) => {
+          allGames.push(game);
+        });
+        break;
+      default:
+        //handle game input
+        var mechanics = item.mechanics;
+        for (var mechanic of mechanics) {
+          numSearchMechanics += 1;
+          var mechanicGameResults = await axios.get(searchURL(mechanic.id));
+          console.log("***after games fetch from mechanic***");
+          gameResultsArray = await mechanicGameResults.data.games;
+          //Add each game to an array
+          gameResultsArray.forEach((game) => {
+            allGames.push(game);
+          });
+        }
     }
   }
   console.log("allGames.length:", allGames.length);

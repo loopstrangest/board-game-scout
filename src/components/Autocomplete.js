@@ -5,7 +5,7 @@ import { addGameToSearchCriteria } from "../actions/gamesAction";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-const Autocomplete = ({ game, name, image }) => {
+const Autocomplete = ({ game, type, name, image }) => {
   const dispatch = useDispatch();
 
   const clickAutocomplete = (e) => {
@@ -27,10 +27,14 @@ const Autocomplete = ({ game, name, image }) => {
       onMouseOver={onHover}
       onMouseOut={offHover}
     >
-      <div className="image-container">
-        <img src={image} alt={name} />
-      </div>
-      <p>{name}</p>
+      {type === "mechanic" ? (
+        ""
+      ) : (
+        <div className="image-container">
+          <img src={image} alt={name} />
+        </div>
+      )}
+      {type === "mechanic" ? <p>{name} (Mechanic)</p> : <p>{name}</p>}
     </StyledAutocomplete>
   );
 };
@@ -43,6 +47,7 @@ const StyledAutocomplete = styled(motion.div)`
   padding-top: auto;
   padding-bottom: auto;
   min-width: 200px;
+  background: white;
 
   .image-container {
     height: 50px;

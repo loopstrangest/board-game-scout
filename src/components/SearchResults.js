@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeSearchResults } from "../actions/gamesAction";
 import Game from "../components/Game";
 //styling and animation
 import styled from "styled-components";
@@ -28,7 +27,7 @@ const SearchCriteria = () => {
         </button>
       </h2>
       <h4>
-        <p>Criteria:</p>
+        <p>Match Criteria:</p>
         {searchCriteriaDisplay.map((game) => {
           return (
             <p key={game.name} class="criteriaName">
