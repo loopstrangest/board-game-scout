@@ -1,6 +1,6 @@
 import axios from "axios";
 import { popularURL, autocompleteURL } from "../api";
-import { evaluateAllGames } from "../actions/evaluateGames";
+import { fetchGamesFromSearchCriteria } from "../actions/fetchSearchResults";
 
 //Load games by default
 export const loadGames = () => async (dispatch) => {
@@ -49,26 +49,23 @@ export const removeGameFromSearchCriteria = (criteria) => async (dispatch) => {
 
 //Triggered by UI search button click
 export const fetchSearch = (searchCriteria) => async (dispatch) => {
-  console.log("fetching search ");
-  const searchResults = await evaluateAllGames(searchCriteria);
-  console.log("searchResults:");
-  console.log(searchResults);
-  console.log("searchResults size:", searchResults.length);
-
   dispatch({
     type: "LOADING_SEARCH_RESULTS",
     payload: {
       loadingSearchResults: true,
     },
   });
+  const search = await fetchGamesFromSearchCriteria(searchCriteria);
+  const searchResults = search[0];
+  const numSearchMechanics = search[1];
 
-  setTimeout(() => {
-    dispatch({
-      type: "FETCH_SEARCH",
-      payload: {
-        searchResults: searchResults,
-        loadingSearchResults: false,
-      },
-    });
-  }, 5000);
+  dispatch({
+    type: "FETCH_SEARCH",
+    payload: {
+      searchCriteriaDisplay: JSON.parse(JSON.stringify(searchCriteria)),
+      searchResults: searchResults,
+      numSearchMechanics: numSearchMechanics,
+      loadingSearchResults: false,
+    },
+  });
 };

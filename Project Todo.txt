@@ -1,8 +1,7 @@
 Search:
-- Revise search function to always take all game mechanics into account
 - Revise Autocomplete to include game mechanics
 - Revise SearchCriteria to include game mechanics
-- Revise fetchURLSearchParameters to handle games and/or mechanics as input
+- Revise fetchSearchResults to handle games and/or mechanics as input
 
 ~*~*~*~*~*~*~
 
@@ -28,3 +27,14 @@ Search:
 02.17.21:
 - Added loading component to display on search button click
 - Format search component and subcomponents
+
+02.18.21:
+- Revised search function to always take all game mechanics into account
+- Ordered search results by frequency of search criteria game mechanics
+
+02.19.21:
+- Separated search criteria listed above search results from searchCriteria state
+- Created SearchResults component
+- Added button to close search results
+- Added Game link to Board Game Atlas page
+- Added FontAwesome flag icon

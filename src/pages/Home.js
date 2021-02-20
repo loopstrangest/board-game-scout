@@ -4,54 +4,31 @@ import { loadGames } from "../actions/gamesAction";
 //components
 import Game from "../components/Game";
 import Search from "../components/Search";
+import SearchResults from "../components/SearchResults";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag } from "@fortawesome/free-regular-svg-icons";
 
 const Home = () => {
+  //use fontawesomeicon
+  const flag = <FontAwesomeIcon icon={faFlag} />;
   //fetch games
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { popular, searchCriteria, searchResults } = useSelector(
-    (state) => state.games
-  );
+  const { popular, searchResults } = useSelector((state) => state.games);
   return (
     <GameList>
-      <h1>Board Game Scout</h1>
+      <h1>
+        Board Game Scout&nbsp;
+        {flag}
+      </h1>
       <Search />
-      {searchResults.length ? (
-        <div>
-          <h2>Search Results</h2>
-          <h4>
-            <p>Games Like:</p>
-            {searchCriteria.map((game) => {
-              return (
-                <p key={game.name} class="criteriaName">
-                  {game.name}
-                </p>
-              );
-            })}
-          </h4>
-          <Games>
-            {searchResults.map((game) => {
-              return (
-                <Game
-                  name={game.name}
-                  year={game.year_published}
-                  id={game.id}
-                  image={game.image_url}
-                  key={game.id}
-                />
-              );
-            })}
-          </Games>
-        </div>
-      ) : (
-        ""
-      )}
+      {searchResults.length ? <SearchResults /> : ""}
       <h2>Popular Games</h2>
       <Games>
         {popular.map((game) => (
@@ -60,6 +37,7 @@ const Home = () => {
             year={game.year_published}
             id={game.id}
             image={game.image_url}
+            url={game.url}
             key={game.id}
           />
         ))}
@@ -69,7 +47,7 @@ const Home = () => {
 };
 
 const GameList = styled(motion.div)`
-  padding: 0rem 5rem;
+  padding: 0rem 2.5rem;
   h2 {
     padding-top: 5rem;
   }

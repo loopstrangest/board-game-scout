@@ -19,6 +19,7 @@ body{
     width: 100%;
 }
 h1{
+    text-align: center;
     font-size: 3rem;
     color: #333;
     padding-top: 1rem;

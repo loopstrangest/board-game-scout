@@ -2,8 +2,10 @@ const initState = {
   popular: [],
   autocomplete: [],
   searchCriteria: [],
+  searchCriteriaDisplay: [],
   loadingSearchResults: false,
   searchResults: [],
+  numSearchMechanics: 0,
 };
 
 function checkNewCriteriaIsUnique(searchCriteria, newCriteria) {
@@ -73,16 +75,24 @@ const gamesReducer = (state = initState, action) => {
     case "FETCH_SEARCH":
       return {
         ...state,
+        searchCriteriaDisplay: action.payload.searchCriteriaDisplay,
         searchResults: removeSearchCriteriaFromSearchResults(
           state.searchCriteria,
           action.payload.searchResults
         ),
+        numSearchMechanics: action.payload.numSearchMechanics,
         loadingSearchResults: action.payload.loadingSearchResults,
       };
     case "LOADING_SEARCH_RESULTS":
       return {
         ...state,
         loadingSearchResults: action.payload.loadingSearchResults,
+      };
+    case "CLEAR_SEARCH_RESULTS":
+      return {
+        ...state,
+        searchResults: [],
+        searchCriteriaDisplay: [],
       };
     default:
       return { ...state };
