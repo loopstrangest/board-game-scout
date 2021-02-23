@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeGameFromSearchCriteria } from "../actions/gamesAction";
+import { removeFilterFromFilterCriteria } from "../actions/gamesAction";
 
 //styling and animation
 import styled from "styled-components";
@@ -7,27 +7,32 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const SearchCriteria = ({ game, name, image }) => {
+const ResultsCriteria = ({ name, value }) => {
   //use fontawesomeicon
   const x = <FontAwesomeIcon icon={faTimes} />;
   const dispatch = useDispatch();
 
   const clickRemove = (e) => {
-    dispatch(removeGameFromSearchCriteria(game));
+    console.log(name);
+    dispatch(removeFilterFromFilterCriteria(name));
+    dispatch({ type: "FILTER_SEARCH_RESULTS_DISPLAY" });
   };
 
   return (
-    <StyledSearchCriteria>
-      <p>{name}</p>
+    <StyledResultsCriteria>
+      <p>
+        {name.replace("_", ". ")}: {value.toString()}
+      </p>
       <button onClick={clickRemove}>{x}</button>
-    </StyledSearchCriteria>
+    </StyledResultsCriteria>
   );
 };
 
-const StyledSearchCriteria = styled(motion.div)`
+const StyledResultsCriteria = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   margin: 0.25rem;
+  margin-left: 0rem;
   background-color: lightblue;
   border-radius: 5px;
   padding: 0px 5px;
@@ -47,4 +52,4 @@ const StyledSearchCriteria = styled(motion.div)`
   }
 `;
 
-export default SearchCriteria;
+export default ResultsCriteria;

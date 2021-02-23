@@ -3,13 +3,18 @@ import Game from "../components/Game";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import ResultsFilters from "./ResultsFilters";
 
 const SearchCriteria = () => {
+  //use fontawesomeicon
+  const x = <FontAwesomeIcon icon={faTimes} />;
   const dispatch = useDispatch();
 
   //get data
   const {
-    searchResults,
+    searchResultsDisplay,
     numSearchMechanics,
     searchCriteriaDisplay,
   } = useSelector((state) => state.games);
@@ -23,11 +28,11 @@ const SearchCriteria = () => {
       <h2>
         Search Results
         <button class="clearSearchResultsButton" onClick={removeSearchResults}>
-          X
+          {x}
         </button>
       </h2>
       <h4>
-        <p>Match Criteria:</p>
+        <p>Searched Games + Mechanics:</p>
         {searchCriteriaDisplay.map((game) => {
           return (
             <p key={game.name} class="criteriaName">
@@ -36,15 +41,23 @@ const SearchCriteria = () => {
           );
         })}
       </h4>
+      <ResultsFilters />
       <Games>
-        {searchResults.map((game) => {
+        {searchResultsDisplay.map((game) => {
           return (
             <Game
               name={game.name}
+              rating={game.average_user_rating}
               year={game.year_published}
+              minPlayers={game.min_players}
+              maxPlayers={game.max_players}
+              price={game.price}
+              minTime={game.min_playtime}
+              maxTime={game.max_playtime}
               id={game.id}
               count={game.count}
               numSearchMechanics={numSearchMechanics}
+              matchedMechanics={game.matched_mechanics}
               image={game.image_url}
               url={game.url}
               key={game.id}

@@ -22,7 +22,7 @@ const Search = () => {
     clearTimeout(searchInputTimer);
     searchInputTimer = setTimeout(function () {
       inputHandler(e);
-    }, 250);
+    }, 500);
   };
 
   function inputHandler(e) {
@@ -49,7 +49,7 @@ const Search = () => {
   return (
     <StyledSearch>
       <div class="searchInfo">
-        <label for="gameSearch">Games and Mechanics: </label>
+        <label for="gameSearch">Games + Mechanics: </label>
         <input id="gameSearch" type="search" onKeyUp={handleKeyUp} />
       </div>
       {searchCriteria.length ? (

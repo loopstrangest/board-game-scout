@@ -2,21 +2,21 @@
 //AND ORDER BY WHICH GAMES SHOW UP MOST OFTEN
 //GAMES FOR DUPLICATED MECHANICS WILL NATURALLY BE WEIGHTED HIGHER
 import axios from "axios";
-import { searchURL } from "../api";
+import { searchURL, allMechanicsURL } from "../api";
 
 //From the games + mechanics listed in searchCriteria, get matching games
 export async function fetchGamesFromSearchCriteria(searchCriteria) {
+  var allMechanicsWithNames = await axios.get(allMechanicsURL());
   var allGames = [];
+  var inputMechanics = [];
   var gameResultsArray = [];
-  var filteredGames = [];
   var numSearchMechanics = 0;
-  console.log("searchCriteria:");
-  console.log(searchCriteria);
   //Add every mechanic to allMechanics
   for (var item of searchCriteria) {
     switch (item.type) {
       case "mechanic":
         //handle mechanic input
+        inputMechanics.push(item.id);
         numSearchMechanics += 1;
         var mechanicGameResults = await axios.get(searchURL(item.id));
         gameResultsArray = await mechanicGameResults.data.games;
@@ -29,8 +29,9 @@ export async function fetchGamesFromSearchCriteria(searchCriteria) {
         //handle game input
         var mechanics = item.mechanics;
         for (var mechanic of mechanics) {
+          inputMechanics.push(mechanic.id);
           numSearchMechanics += 1;
-          var mechanicGameResults = await axios.get(searchURL(mechanic.id));
+          mechanicGameResults = await axios.get(searchURL(mechanic.id));
           console.log("***after games fetch from mechanic***");
           gameResultsArray = await mechanicGameResults.data.games;
           //Add each game to an array
@@ -40,13 +41,25 @@ export async function fetchGamesFromSearchCriteria(searchCriteria) {
         }
     }
   }
-  console.log("allGames.length:", allGames.length);
-  console.log("***start of sort***");
-  filteredGames = await sortByFrequencyAndRemoveDuplicates(allGames);
-  console.log("***end of sort***");
-  console.log(filteredGames);
-  console.log("***end of fetchGamesFromSearchCriteria***");
-  return [filteredGames, numSearchMechanics];
+  var resultGames = await sortByFrequencyAndRemoveDuplicates(allGames);
+
+  //Filter list of allMechanicsWithNames to only include the mechanics found from the search
+  var inputMechanicsWithNames = allMechanicsWithNames.data.mechanics.filter(
+    (mechanic) => inputMechanics.indexOf(mechanic.id) !== -1
+  );
+
+  //Give each result game a list of its mechanics that match the input mechanics
+  resultGames.forEach((game) => {
+    game["matched_mechanics"] = [];
+    for (var resultGameMechanic of game.mechanics) {
+      for (var inputMechanic of inputMechanicsWithNames) {
+        if (inputMechanic.id === resultGameMechanic.id) {
+          game["matched_mechanics"].push(inputMechanic.name);
+        }
+      }
+    }
+  });
+  return [resultGames, numSearchMechanics];
 }
 
 //Sort and filter games based on the highest number of matching mechanics
@@ -75,5 +88,5 @@ function sortByFrequencyAndRemoveDuplicates(arr) {
     }
     return diff;
   });
-  return frequency;
+  return frequency.slice(0, 61);
 }

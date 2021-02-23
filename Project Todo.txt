@@ -1,8 +1,5 @@
 App:
-- Revise Game data display
-- Add number of players filter
-- Add play time filter
-- Add price filter
+- Add explainer screen
 
 
 ~*~*~*~*~*~*~
@@ -30,11 +27,11 @@ App:
 - Added loading component to display on search button click
 - Format search component and subcomponents
 
-02.18.21:
+02.19.21:
 - Revised search function to always take all game mechanics into account
 - Ordered search results by frequency of search criteria game mechanics
 
-02.19.21:
+02.20.21:
 - Separated search criteria listed above search results from searchCriteria state
 - Created SearchResults component
 - Added button to close search results
@@ -42,3 +39,17 @@ App:
 - Added FontAwesome flag icon
 - Revised Autocomplete and SearchCriteria to include game mechanics
 - Revised fetchSearchResults to handle games and/or mechanics as input
+
+02.22.21
+- Replaced button X's with FontAwesome X's
+- Added num players, playtime, icons to Game component
+- Added number of players filter
+- Added play time filter
+- Added price to Game component
+
+02.23.21
+- Added year published filters
+- Added price filters
+- Added rating to Game component
+- Added rating filter
+- Added list of matching mechanics on % match hover

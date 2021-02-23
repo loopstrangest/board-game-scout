@@ -98,3 +98,25 @@ export const fetchSearch = (searchCriteria) => async (dispatch) => {
     },
   });
 };
+
+export const updateFilterCriteria = (filterParam, value) => async (
+  dispatch
+) => {
+  dispatch({
+    type: "UPDATE_FILTER_CRITERIA",
+    payload: {
+      newFilterCriteria: { [filterParam]: value },
+    },
+  });
+};
+
+export const removeFilterFromFilterCriteria = (filterParam) => async (
+  dispatch
+) => {
+  dispatch({
+    type: "REMOVE_FILTER_FROM_FILTER_CRITERIA",
+    payload: {
+      removeFilterCriteria: filterParam,
+    },
+  });
+};

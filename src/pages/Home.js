@@ -34,6 +34,12 @@ const Home = () => {
         {popular.map((game) => (
           <Game
             name={game.name}
+            rating={game.average_user_rating}
+            minPlayers={game.min_players}
+            maxPlayers={game.max_players}
+            minTime={game.min_playtime}
+            maxTime={game.max_playtime}
+            price={game.price}
             year={game.year_published}
             id={game.id}
             image={game.image_url}
