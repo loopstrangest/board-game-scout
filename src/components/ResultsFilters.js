@@ -54,7 +54,7 @@ const ResultsFilters = () => {
     <StyledResultsFilters>
       <div className="filterOptions">
         <div className="dropdown">
-          <p>Players&nbsp;{down}</p>
+          <p class="filter-label">Players&nbsp;{down}</p>
           <div className="dropdown-content">
             <p onClick={setClickFilter(playersParam)}>1</p>
             <p onClick={setClickFilter(playersParam)}>2</p>
@@ -68,7 +68,7 @@ const ResultsFilters = () => {
           </div>
         </div>
         <div className="dropdown">
-          <p>Playtime&nbsp;{down}</p>
+          <p class="filter-label">Playtime&nbsp;{down}</p>
           <div className="dropdown-content">
             <p onClick={setClickFilter(playtimeParam)}>15 min</p>
             <p onClick={setClickFilter(playtimeParam)}>30 min</p>
@@ -80,7 +80,7 @@ const ResultsFilters = () => {
           </div>
         </div>
         <div className="dropdown">
-          <p>Rating&nbsp;{down}</p>
+          <p class="filter-label">Rating&nbsp;{down}</p>
           <div className="dropdown-content">
             <p onClick={setClickFilter(ratingParam)}>2+ Stars</p>
             <p onClick={setClickFilter(ratingParam)}>2.5+ Stars</p>
@@ -91,7 +91,7 @@ const ResultsFilters = () => {
           </div>
         </div>
         <div className="dropdown">
-          <p>Year&nbsp;{down}</p>
+          <p class="filter-label">Year&nbsp;{down}</p>
           <div className="dropdown-content input">
             <input
               class="form-control"
@@ -111,7 +111,7 @@ const ResultsFilters = () => {
           </div>
         </div>
         <div className="dropdown">
-          <p>Price&nbsp;{down}</p>
+          <p class="filter-label">Price&nbsp;{down}</p>
           <div className="dropdown-content input">
             <input
               class="form-control"
@@ -163,6 +163,10 @@ const StyledResultsFilters = styled(motion.div)`
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
+  }
+
+  .dropdown:hover .filter-label {
+    color: lightblue;
   }
 
   .dropdown:hover .dropdown-content {

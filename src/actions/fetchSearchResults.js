@@ -6,6 +6,7 @@ import { searchURL, allMechanicsURL } from "../api";
 
 //From the games + mechanics listed in searchCriteria, get matching games
 export async function fetchGamesFromSearchCriteria(searchCriteria) {
+  console.log("searchCriteria is", searchCriteria);
   var allMechanicsWithNames = await axios.get(allMechanicsURL());
   var allGames = [];
   var inputMechanics = [];
@@ -77,9 +78,6 @@ function sortByFrequencyAndRemoveDuplicates(arr) {
     }
     return accumulatorObject;
   }, []);
-
-  console.log("frequency");
-  console.log(frequency);
 
   frequency.sort(function (first, second) {
     var diff = second.count - first.count;

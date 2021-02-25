@@ -34,6 +34,7 @@ const Search = () => {
   }
 
   function clickSearch() {
+    dispatch({ type: "CLEAR_SEARCH_RESULTS" });
     dispatch(fetchSearch(searchCriteria));
   }
 
@@ -42,45 +43,45 @@ const Search = () => {
     dispatch(loadGames());
   }, [dispatch]);
   //get data
-  const { autocomplete, searchCriteria, loadingSearchResults } = useSelector(
-    (state) => state.games
-  );
+  const { autocomplete, searchCriteria } = useSelector((state) => state.games);
+  const { loadingResults } = useSelector((state) => state.app);
 
   return (
     <StyledSearch>
       <div class="searchInfo">
-        <label for="gameSearch">Games + Mechanics: </label>
-        <input id="gameSearch" type="search" onKeyUp={handleKeyUp} />
+        <label for="criteriaSearch">Select Games + Mechanics: </label>
+        <input id="criteriaSearch" type="search" onKeyUp={handleKeyUp} />
       </div>
       {searchCriteria.length ? (
         <SearchElements>
-          {searchCriteria.map((game) => (
+          {searchCriteria.map((criteria) => (
             <SearchCriteria
-              game={game}
-              name={game.name}
-              id={game.id}
-              key={game.id}
+              criteria={criteria}
+              name={criteria.name}
+              url={criteria.url}
+              id={criteria.id}
+              key={criteria.id}
             />
           ))}
           <button class="searchButton" onClick={clickSearch}>
-            Search!
+            Search
           </button>
         </SearchElements>
       ) : (
         ""
       )}
-      {loadingSearchResults ? <Loading /> : ""}
+      {loadingResults ? <Loading /> : ""}
       {autocomplete.length ? (
         <AutocompleteList>
-          {autocomplete.map((game) => {
+          {autocomplete.map((autoResult) => {
             return (
               <Autocomplete
-                type={game.type}
-                game={game}
-                name={game.name}
-                id={game.id}
-                image={game.image_url}
-                key={game.id}
+                type={autoResult.type}
+                autoResult={autoResult}
+                name={autoResult.name}
+                id={autoResult.id}
+                image={autoResult.image_url}
+                key={autoResult.id}
               />
             );
           })}
@@ -95,6 +96,10 @@ const Search = () => {
 const StyledSearch = styled(motion.div)`
   * {
     font-size: 20px;
+  }
+
+  #criteriaSearch {
+    border: 1px solid lightblue;
   }
 
   padding-top: 2rem;

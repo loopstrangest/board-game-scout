@@ -23,6 +23,10 @@ const SearchCriteria = () => {
     dispatch({ type: "CLEAR_SEARCH_RESULTS" });
   };
 
+  const openGamePage = (url) => () => {
+    window.open(url);
+  };
+
   return (
     <StyledSearchResults>
       <h2>
@@ -33,38 +37,48 @@ const SearchCriteria = () => {
       </h2>
       <h4>
         <p>Searched Games + Mechanics:</p>
-        {searchCriteriaDisplay.map((game) => {
+        {searchCriteriaDisplay.map((criteria) => {
           return (
-            <p key={game.name} class="criteriaName">
-              {game.name}
+            <p
+              key={criteria.name}
+              class="criteriaName"
+              onClick={openGamePage(criteria.url)}
+            >
+              {criteria.name}
             </p>
           );
         })}
       </h4>
       <ResultsFilters />
-      <Games>
-        {searchResultsDisplay.map((game) => {
-          return (
-            <Game
-              name={game.name}
-              rating={game.average_user_rating}
-              year={game.year_published}
-              minPlayers={game.min_players}
-              maxPlayers={game.max_players}
-              price={game.price}
-              minTime={game.min_playtime}
-              maxTime={game.max_playtime}
-              id={game.id}
-              count={game.count}
-              numSearchMechanics={numSearchMechanics}
-              matchedMechanics={game.matched_mechanics}
-              image={game.image_url}
-              url={game.url}
-              key={game.id}
-            />
-          );
-        })}
-      </Games>
+      {searchResultsDisplay.length ? (
+        <Games>
+          {searchResultsDisplay.map((game) => {
+            return (
+              <Game
+                name={game.name}
+                rating={game.average_user_rating}
+                year={game.year_published}
+                minPlayers={game.min_players}
+                maxPlayers={game.max_players}
+                price={game.price}
+                minTime={game.min_playtime}
+                maxTime={game.max_playtime}
+                id={game.id}
+                count={game.count}
+                numSearchMechanics={numSearchMechanics}
+                matchedMechanics={game.matched_mechanics}
+                image={game.image_url}
+                url={game.url}
+                key={game.id}
+              />
+            );
+          })}
+        </Games>
+      ) : (
+        <div className="no-results">
+          <p>no results :(</p>
+        </div>
+      )}
     </StyledSearchResults>
   );
 };
@@ -88,10 +102,35 @@ const StyledSearchResults = styled(motion.div)`
   .clearSearchResultsButton:hover {
     background-color: lightblue;
   }
+  .criteriaName {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0.25rem;
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 2px 5px;
+  }
+  .criteriaName:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  .no-results {
+    display: flex;
+    justify-content: center;
+  }
+
+  .no-results p {
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    padding: 0 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 20px lightblue;
+  }
 `;
 
 const Games = styled(motion.div)`
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

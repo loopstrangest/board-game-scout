@@ -8,7 +8,7 @@ const search_prefix = "search?";
 const name_prefix = "name=";
 const order_full_param = "order_by=rank";
 const mechanics_prefix = "mechanics=";
-const mechanics_test_param = "mechanics=vZsDDAdOoe";
+//const mechanics_test_param = "mechanics=vZsDDAdOoe";
 
 const all_mechanics_url = base_url + `game/mechanics?client_id=${client_key}`;
 const popular_url =

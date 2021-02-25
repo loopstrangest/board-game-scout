@@ -1,16 +1,16 @@
 import { useDispatch } from "react-redux";
-import { addGameToSearchCriteria } from "../actions/gamesAction";
+import { addSelectionToSearchCriteria } from "../actions/gamesAction";
 
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-const Autocomplete = ({ game, type, name, image }) => {
+const Autocomplete = ({ autoResult, type, name, image }) => {
   const dispatch = useDispatch();
 
   const clickAutocomplete = (e) => {
-    dispatch(addGameToSearchCriteria(game));
-    document.getElementById("gameSearch").value = "";
+    document.getElementById("criteriaSearch").value = "";
+    dispatch(addSelectionToSearchCriteria(autoResult));
     dispatch({ type: "CLEAR_AUTOCOMPLETE" });
   };
 

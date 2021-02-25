@@ -3,7 +3,6 @@ const initState = {
   autocomplete: [],
   searchCriteria: [],
   searchCriteriaDisplay: [],
-  loadingSearchResults: false,
   searchResults: [],
   searchResultsDisplay: [],
   filterCriteria: {},
@@ -52,14 +51,13 @@ const gamesReducer = (state = initState, action) => {
       return {
         ...state,
         autocomplete: action.payload.autocomplete,
-        loadingSearchResults: action.payload.loadingSearchResults,
       };
     case "CLEAR_AUTOCOMPLETE":
       return {
         ...state,
         autocomplete: [],
       };
-    case "ADD_GAME_TO_SEARCH_CRITERIA":
+    case "ADD_SELECTION_TO_SEARCH_CRITERIA":
       return {
         ...state,
         searchCriteria: checkNewCriteriaIsUnique(
@@ -67,7 +65,7 @@ const gamesReducer = (state = initState, action) => {
           action.payload.newCriteria
         ),
       };
-    case "REMOVE_GAME_FROM_SEARCH_CRITERIA":
+    case "REMOVE_SELECTION_FROM_SEARCH_CRITERIA":
       return {
         ...state,
         searchCriteria: deleteSearchCriteria(
@@ -87,17 +85,11 @@ const gamesReducer = (state = initState, action) => {
           action.payload.searchResults
         ),
         numSearchMechanics: action.payload.numSearchMechanics,
-        loadingSearchResults: action.payload.loadingSearchResults,
       };
     case "UPDATE_SEARCH_CRITERIA_DISPLAY":
       return {
         ...state,
         searchCriteriaDisplay: action.payload.searchCriteriaDisplay,
-      };
-    case "LOADING_SEARCH_RESULTS":
-      return {
-        ...state,
-        loadingSearchResults: action.payload.loadingSearchResults,
       };
     case "CLEAR_SEARCH_RESULTS":
       return {
@@ -105,6 +97,7 @@ const gamesReducer = (state = initState, action) => {
         searchResults: [],
         searchResultsDisplay: [],
         searchCriteriaDisplay: [],
+        filterCriteria: {},
       };
     case "UPDATE_FILTER_CRITERIA":
       return {

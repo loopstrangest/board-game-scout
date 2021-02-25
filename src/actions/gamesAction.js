@@ -17,9 +17,9 @@ export const loadGames = () => async (dispatch) => {
 export const fetchAutocomplete = (search_string) => async (dispatch) => {
   dispatch({ type: "CLEAR_AUTOCOMPLETE" });
   dispatch({
-    type: "LOADING_SEARCH_RESULTS",
+    type: "LOADING_RESULTS",
     payload: {
-      loadingSearchResults: true,
+      loadingResults: true,
     },
   });
 
@@ -46,23 +46,30 @@ export const fetchAutocomplete = (search_string) => async (dispatch) => {
     type: "FETCH_AUTOCOMPLETE",
     payload: {
       autocomplete: combinedAutocompleteResults,
-      loadingSearchResults: false,
+    },
+  });
+  dispatch({
+    type: "LOADING_RESULTS",
+    payload: {
+      loadingResults: false,
     },
   });
 };
 
-export const addGameToSearchCriteria = (criteria) => async (dispatch) => {
+export const addSelectionToSearchCriteria = (criteria) => async (dispatch) => {
   dispatch({
-    type: "ADD_GAME_TO_SEARCH_CRITERIA",
+    type: "ADD_SELECTION_TO_SEARCH_CRITERIA",
     payload: {
       newCriteria: criteria,
     },
   });
 };
 
-export const removeGameFromSearchCriteria = (criteria) => async (dispatch) => {
+export const removeSelectionFromSearchCriteria = (criteria) => async (
+  dispatch
+) => {
   dispatch({
-    type: "REMOVE_GAME_FROM_SEARCH_CRITERIA",
+    type: "REMOVE_SELECTION_FROM_SEARCH_CRITERIA",
     payload: {
       removeCriteria: criteria,
     },
@@ -74,9 +81,9 @@ export const fetchSearch = (searchCriteria) => async (dispatch) => {
   //Make copy of searchCriteria that is unaffected by user actions
   const copyOfSearchCriteria = JSON.parse(JSON.stringify(searchCriteria));
   dispatch({
-    type: "LOADING_SEARCH_RESULTS",
+    type: "LOADING_RESULTS",
     payload: {
-      loadingSearchResults: true,
+      loadingResults: true,
     },
   });
   dispatch({
@@ -86,6 +93,7 @@ export const fetchSearch = (searchCriteria) => async (dispatch) => {
     },
   });
   const searchData = await fetchGamesFromSearchCriteria(copyOfSearchCriteria);
+  console.log("searchData is", searchData);
   const searchResults = searchData[0];
   const numSearchMechanics = searchData[1];
 
@@ -94,7 +102,12 @@ export const fetchSearch = (searchCriteria) => async (dispatch) => {
     payload: {
       searchResults: searchResults,
       numSearchMechanics: numSearchMechanics,
-      loadingSearchResults: false,
+    },
+  });
+  dispatch({
+    type: "LOADING_RESULTS",
+    payload: {
+      loadingResults: false,
     },
   });
 };

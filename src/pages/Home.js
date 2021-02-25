@@ -5,24 +5,41 @@ import { loadGames } from "../actions/gamesAction";
 import Game from "../components/Game";
 import Search from "../components/Search";
 import SearchResults from "../components/SearchResults";
+import Explainer from "../components/Explainer";
 //styling and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-regular-svg-icons";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  //use fontawesomeicon
-  const flag = <FontAwesomeIcon icon={faFlag} />;
   //fetch games
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadGames());
   }, [dispatch]);
+
+  const toggleExplainer = () => {
+    dispatch({ type: "TOGGLE_EXPLAINER" });
+  };
+
+  //use fontawesomeicon
+  const flag = <FontAwesomeIcon icon={faFlag} />;
+  const question = (
+    <FontAwesomeIcon
+      class="question"
+      onClick={toggleExplainer}
+      icon={faQuestion}
+    />
+  );
   //get data
   const { popular, searchResults } = useSelector((state) => state.games);
+  const { showExplainer } = useSelector((state) => state.app);
   return (
     <GameList>
+      {showExplainer ? <Explainer /> : ""}
+      {question}
       <h1>
         Board Game Scout&nbsp;
         {flag}
@@ -53,22 +70,31 @@ const Home = () => {
 };
 
 const GameList = styled(motion.div)`
+  .question {
+    opacity: 20%;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: lightblue;
+  }
+  .question:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
   padding: 0rem 2.5rem;
   h2 {
-    padding-top: 5rem;
+    padding-top: 2rem;
   }
   h4 {
     display: flex;
     flex-direction: row;
     padding-bottom: 1rem;
   }
-  .criteriaName {
-    padding-left: 1rem;
-    margin-top: 0;
-  }
 `;
 const Games = styled(motion.div)`
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

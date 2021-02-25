@@ -31,8 +31,6 @@ const Game = ({
   const time = <FontAwesomeIcon icon={faHourglassHalf} />;
   const calendar = <FontAwesomeIcon icon={faCalendarDay} />;
   const dollar = <FontAwesomeIcon icon={faDollarSign} />;
-  const starFull = <FontAwesomeIcon icon={fullStar} />;
-  const starEmpty = <FontAwesomeIcon icon={emptyStar} />;
 
   const formatPlaytime = () => {
     return minTime === maxTime
@@ -51,9 +49,9 @@ const Game = ({
     const roundedRating = Math.round(rating);
     for (let i = 1; i <= 5; i++) {
       if (i <= roundedRating) {
-        stars.push(starFull);
+        stars.push(<FontAwesomeIcon key={i} icon={fullStar} />);
       } else {
-        stars.push(starEmpty);
+        stars.push(<FontAwesomeIcon key={i} icon={emptyStar} />);
       }
     }
     return stars;
@@ -66,7 +64,7 @@ const Game = ({
       </p>,
     ];
     matchedMechanics.forEach((mechanic) => {
-      mechanicsList.push(<p>{mechanic}</p>);
+      mechanicsList.push(<p key={mechanic}>{mechanic}</p>);
     });
     return mechanicsList;
   };
@@ -104,9 +102,9 @@ const Game = ({
         {time}&nbsp;
         {formatPlaytime()}
         &nbsp;&nbsp;
-        {calendar}&nbsp;{year}
+        {calendar}&nbsp;{year ? year : "n/a"}
         &nbsp;&nbsp;
-        {dollar}&nbsp;{price}
+        {dollar}&nbsp;{price && price !== "0.00" ? price : "n/a"}
       </p>
       <img src={image} alt={name} />
     </StyledGame>

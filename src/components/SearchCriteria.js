@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeGameFromSearchCriteria } from "../actions/gamesAction";
+import { removeSelectionFromSearchCriteria } from "../actions/gamesAction";
 
 //styling and animation
 import styled from "styled-components";
@@ -7,18 +7,22 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const SearchCriteria = ({ game, name, image }) => {
+const SearchCriteria = ({ criteria, name, url }) => {
   //use fontawesomeicon
   const x = <FontAwesomeIcon icon={faTimes} />;
   const dispatch = useDispatch();
 
   const clickRemove = (e) => {
-    dispatch(removeGameFromSearchCriteria(game));
+    dispatch(removeSelectionFromSearchCriteria(criteria));
+  };
+
+  const openGamePage = () => {
+    window.open(url);
   };
 
   return (
     <StyledSearchCriteria>
-      <p>{name}</p>
+      <p onClick={openGamePage}>{name}</p>
       <button onClick={clickRemove}>{x}</button>
     </StyledSearchCriteria>
   );
@@ -34,6 +38,10 @@ const StyledSearchCriteria = styled(motion.div)`
   p {
     margin: auto;
     margin-right: 0.25rem;
+  }
+  p:hover {
+    color: white;
+    cursor: pointer;
   }
   button {
     height: 75%;

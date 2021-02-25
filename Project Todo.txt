@@ -1,6 +1,7 @@
 App:
-- Add explainer screen
-
+- Revise state/action/reducer categorization:
+    games: popular, searchResults, searchResultsDisplay
+    search: autocomplete, searchCriteria, searchCriteriaDisplay, numSearchMechanics, filterCriteria
 
 ~*~*~*~*~*~*~
 
@@ -40,16 +41,24 @@ App:
 - Revised Autocomplete and SearchCriteria to include game mechanics
 - Revised fetchSearchResults to handle games and/or mechanics as input
 
-02.22.21
+02.22.21:
 - Replaced button X's with FontAwesome X's
 - Added num players, playtime, icons to Game component
 - Added number of players filter
 - Added play time filter
 - Added price to Game component
 
-02.23.21
+02.23.21:
 - Added year published filters
 - Added price filters
 - Added rating to Game component
 - Added rating filter
 - Added list of matching mechanics on % match hover
+
+02.25.21:
+- Added explainer button, state, toggle
+- Added explainer content
+- Formatted results display
+- Added display for no search results
+- Set up 'app' state: loadingSearchResults, showExplainer
+- Added games/mechanics links from criteria display
