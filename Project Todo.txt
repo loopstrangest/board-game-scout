@@ -1,5 +1,4 @@
 App:
-
 - Revise state/action/reducer categorization:
     games: popular, searchResults, searchResultsDisplay
     search: autocomplete, searchCriteria, searchCriteriaDisplay, numSearchMechanics, filterCriteria
@@ -66,3 +65,4 @@ App:
 
 02.26.21:
 - Added website link to explainer screen
+- Updated readme
