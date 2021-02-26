@@ -1,4 +1,5 @@
 App:
+
 - Revise state/action/reducer categorization:
     games: popular, searchResults, searchResultsDisplay
     search: autocomplete, searchCriteria, searchCriteriaDisplay, numSearchMechanics, filterCriteria
@@ -62,3 +63,6 @@ App:
 - Added display for no search results
 - Set up 'app' state: loadingSearchResults, showExplainer
 - Added games/mechanics links from criteria display
+
+02.26.21:
+- Added website link to explainer screen

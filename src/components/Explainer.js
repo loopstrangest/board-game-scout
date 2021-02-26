@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faHome } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Explainer = () => {
@@ -16,6 +16,7 @@ const Explainer = () => {
   //use fontawesomeicons
   const mail = <FontAwesomeIcon class="icon" icon={faEnvelope} />;
   const twitter = <FontAwesomeIcon class="icon" icon={faTwitter} />;
+  const home = <FontAwesomeIcon class="icon" icon={faHome} />;
 
   return (
     <ExplainerShadow onClick={toggleExplainer}>
@@ -56,6 +57,9 @@ const Explainer = () => {
             {twitter}
           </a>
           <a href="mailto:loopstrangest@gmail.com">{mail}</a>
+          <a href="https://strangestloop.io" target="_blank" rel="noreferrer">
+            {home}
+          </a>
         </div>
       </Information>
     </ExplainerShadow>
