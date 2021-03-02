@@ -2,6 +2,7 @@ App:
 - Revise state/action/reducer categorization:
     games: popular, searchResults, searchResultsDisplay
     search: autocomplete, searchCriteria, searchCriteriaDisplay, numSearchMechanics, filterCriteria
+- Set up server-side functionality to host on website
 
 ~*~*~*~*~*~*~
 
@@ -66,3 +67,6 @@ App:
 02.26.21:
 - Added website link to explainer screen
 - Updated readme
+
+03.02.21:
+- Improved mobile display

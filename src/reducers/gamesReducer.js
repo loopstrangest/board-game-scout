@@ -166,13 +166,15 @@ const gamesReducer = (state = initState, action) => {
             let minPriceValue = parseInt(valueString.substring(1));
             console.log(minPriceValue);
             filteredSearchResultsDisplay = filteredSearchResultsDisplay.filter(
-              (game) => game["price"] >= minPriceValue
+              (game) =>
+                game["price"] >= minPriceValue && game["price"] !== "0.00"
             );
             break;
           case "Max. Price":
             let maxPriceValue = parseInt(valueString.substring(1));
             filteredSearchResultsDisplay = filteredSearchResultsDisplay.filter(
-              (game) => game["price"] <= maxPriceValue
+              (game) =>
+                game["price"] <= maxPriceValue && game["price"] !== "0.00"
             );
             break;
           default:

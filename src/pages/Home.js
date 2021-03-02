@@ -90,12 +90,11 @@ const GameList = styled(motion.div)`
   h4 {
     display: flex;
     flex-direction: row;
-    padding-bottom: 1rem;
   }
 `;
 const Games = styled(motion.div)`
   padding-top: 1.5rem;
-  min-height: 80vh;
+  min-height: 30vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 3rem;

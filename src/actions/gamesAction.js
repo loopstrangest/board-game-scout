@@ -93,7 +93,7 @@ export const fetchSearch = (searchCriteria) => async (dispatch) => {
     },
   });
   const searchData = await fetchGamesFromSearchCriteria(copyOfSearchCriteria);
-  console.log("searchData is", searchData);
+  //console.log("searchData is", searchData);
   const searchResults = searchData[0];
   const numSearchMechanics = searchData[1];
 

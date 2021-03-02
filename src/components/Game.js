@@ -25,6 +25,7 @@ const Game = ({
   count,
   numSearchMechanics,
   matchedMechanics,
+  id,
 }) => {
   //use fontawesomeicons
   const users = <FontAwesomeIcon icon={faUsers} />;
@@ -81,11 +82,11 @@ const Game = ({
     <StyledGame onClick={openGamePage}>
       <h3>{name}</h3>
       {numSearchMechanics > 0 ? (
-        <div class="match">
-          <p onMouseMove={followMouse}>
+        <div key={`match-${id}`} class="match">
+          <p key={`mouse-${id}`} onMouseMove={followMouse}>
             {Math.round((count / numSearchMechanics) * 100)}% Match
           </p>
-          <div className="matched-mechanics">
+          <div key={`mechanics-${id}`} className="matched-mechanics">
             {getMatchedMechanics(matchedMechanics)}
           </div>
         </div>

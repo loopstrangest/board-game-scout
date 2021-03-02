@@ -105,7 +105,7 @@ const StyledSearchResults = styled(motion.div)`
   .criteriaName {
     display: flex;
     justify-content: space-between;
-    margin: 0 0.25rem;
+    margin: auto 0.25rem;
     background-color: lightblue;
     border-radius: 5px;
     padding: 2px 5px;

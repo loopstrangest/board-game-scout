@@ -6,7 +6,6 @@ import { searchURL, allMechanicsURL } from "../api";
 
 //From the games + mechanics listed in searchCriteria, get matching games
 export async function fetchGamesFromSearchCriteria(searchCriteria) {
-  console.log("searchCriteria is", searchCriteria);
   var allMechanicsWithNames = await axios.get(allMechanicsURL());
   var allGames = [];
   var inputMechanics = [];
@@ -33,7 +32,7 @@ export async function fetchGamesFromSearchCriteria(searchCriteria) {
           inputMechanics.push(mechanic.id);
           numSearchMechanics += 1;
           mechanicGameResults = await axios.get(searchURL(mechanic.id));
-          console.log("***after games fetch from mechanic***");
+          //console.log("***after games fetch from mechanic***");
           gameResultsArray = await mechanicGameResults.data.games;
           //Add each game to an array
           gameResultsArray.forEach((game) => {

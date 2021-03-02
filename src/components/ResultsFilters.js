@@ -152,7 +152,7 @@ const StyledResultsFilters = styled(motion.div)`
 
   .dropdown {
     cursor: pointer;
-    margin-right: 1rem;
+    margin: 0.5rem 1rem 0.5rem 0;
   }
 
   .dropdown-content {
