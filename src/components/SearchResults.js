@@ -35,20 +35,18 @@ const SearchCriteria = () => {
           {x}
         </button>
       </h2>
-      <h4>
-        <p>Searched Games + Mechanics:</p>
-        {searchCriteriaDisplay.map((criteria) => {
-          return (
-            <p
-              key={criteria.name}
-              class="criteriaName"
-              onClick={openGamePage(criteria.url)}
-            >
-              {criteria.name}
-            </p>
-          );
-        })}
-      </h4>
+      <p class="criteriaLabel">Games + Mechanics:</p>
+      {searchCriteriaDisplay.map((criteria) => {
+        return (
+          <p
+            key={criteria.name}
+            class="criteriaName"
+            onClick={openGamePage(criteria.url)}
+          >
+            {criteria.name}
+          </p>
+        );
+      })}
       <ResultsFilters />
       {searchResultsDisplay.length ? (
         <Games>
@@ -102,10 +100,19 @@ const StyledSearchResults = styled(motion.div)`
   .clearSearchResultsButton:hover {
     background-color: lightblue;
   }
+
+  .criteriaLabel {
+    margin-right: 0.25rem;
+  }
+  .criteriaLabel,
   .criteriaName {
-    display: flex;
+    display: inline-block;
+  }
+
+  .criteriaName {
     justify-content: space-between;
-    margin: auto 0.25rem;
+    margin: 0.25rem;
+    margin-left: 0;
     background-color: lightblue;
     border-radius: 5px;
     padding: 2px 5px;
@@ -131,11 +138,15 @@ const StyledSearchResults = styled(motion.div)`
 
 const Games = styled(motion.div)`
   padding-top: 1.5rem;
-  min-height: 80vh;
+  padding-bottom: 1.5rem;
+  min-height: 30vh;
   display: grid;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 3rem;
-  grid-row-gap: 5rem;
+  grid-row-gap: 3rem;
 `;
 
 export default SearchCriteria;

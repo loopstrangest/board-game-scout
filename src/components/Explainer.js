@@ -69,7 +69,7 @@ const Explainer = () => {
 const ExplainerShadow = styled(motion.div)`
   width: 100%;
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   overflow-y: scroll;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -90,7 +90,7 @@ const ExplainerShadow = styled(motion.div)`
 const Information = styled(motion.div)`
   display: block;
   width: 75%;
-  height: auto;
+  height: min-content;
   margin: auto;
   border-radius: 1rem;
   padding: 1rem 3rem;

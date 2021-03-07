@@ -21,16 +21,13 @@ body{
 h1{
     text-align: center;
     font-size: 3rem;
-    color: #333;
     padding-top: 1rem;
 }
 h2{
     font-size: 2rem;
-    color: #333;
 }
 h3{
     font-size: 1.3rem;
-    color: #333;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
@@ -39,7 +36,6 @@ p{
 }
 a{
     text-decoration: none;
-    color: #333;
 }
 `;
 

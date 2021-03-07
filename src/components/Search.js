@@ -100,6 +100,7 @@ const StyledSearch = styled(motion.div)`
 
   #criteriaSearch {
     border: 1px solid lightblue;
+    width: 100%;
   }
 
   padding-top: 2rem;
@@ -107,12 +108,18 @@ const StyledSearch = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.25rem;
-    flex-direction: row;
+    flex-direction: column;
+  }
+  input,
+  label {
+    display: block;
+    max-width: 250px;
   }
   label {
-    text-align: right;
-    margin-right: 0.5rem;
+    text-align: center;
+  }
+  input {
+    padding-left: 5px;
   }
 `;
 

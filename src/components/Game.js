@@ -96,34 +96,40 @@ const Game = ({
       <p>
         {getStars()}&nbsp;{rating.toFixed(2)}/5
       </p>
-      <p>
-        {users}&nbsp;
-        {formatPlayers()}
-        &nbsp;&nbsp;
-        {time}&nbsp;
-        {formatPlaytime()}
-        &nbsp;&nbsp;
-        {calendar}&nbsp;{year ? year : "n/a"}
-        &nbsp;&nbsp;
-        {dollar}&nbsp;{price && price !== "0.00" ? price : "n/a"}
-      </p>
+      <div className="gameInfo">
+        <p>
+          {users}&nbsp;
+          {formatPlayers()}
+        </p>
+        <p>
+          {time}&nbsp;
+          {formatPlaytime()}
+        </p>
+        <p>
+          {calendar}&nbsp;{year ? year : "n/a"}
+        </p>
+        <p>
+          {dollar}&nbsp;{price && price !== "0.00" ? price : "n/a"}
+        </p>
+      </div>
+
       <img src={image} alt={name} />
     </StyledGame>
   );
 };
 
 const StyledGame = styled(motion.div)`
+  overflow: hidden;
   h3 {
     font-size: 24px;
   }
   cursor: pointer;
-  min-height: 30vh;
   box-shadow: 0px 5px 20px lightblue;
   text-align: center;
   border-radius: 1rem;
   img {
     width: 100%;
-    height: 40vh;
+    height: 30vh;
     object-fit: contain;
   }
 
@@ -147,6 +153,10 @@ const StyledGame = styled(motion.div)`
 
   .match:hover > .matched-mechanics {
     display: block;
+  }
+  .gameInfo p {
+    display: inline-block;
+    margin: 0 0.25rem;
   }
 `;
 

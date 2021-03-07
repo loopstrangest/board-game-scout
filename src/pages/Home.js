@@ -71,7 +71,7 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   .question {
-    opacity: 20%;
+    opacity: 25%;
     height: 50px;
     position: absolute;
     right: 10px;
@@ -94,11 +94,15 @@ const GameList = styled(motion.div)`
 `;
 const Games = styled(motion.div)`
   padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   min-height: 30vh;
   display: grid;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 3rem;
-  grid-row-gap: 5rem;
+  grid-row-gap: 3rem;
 `;
 
 export default Home;

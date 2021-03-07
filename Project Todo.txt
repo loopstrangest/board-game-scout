@@ -1,11 +1,11 @@
-App:
+
+
+~*~*~*~*~*~*~
 - Revise state/action/reducer categorization:
     games: popular, searchResults, searchResultsDisplay
     search: autocomplete, searchCriteria, searchCriteriaDisplay, numSearchMechanics, filterCriteria
-- Set up server-side functionality to host on website
 
 ~*~*~*~*~*~*~
-
 02.10.21:
 - Fetched autocomplete games with every change to input search string
 - Displayed autocomplete games list
@@ -70,3 +70,18 @@ App:
 
 03.02.21:
 - Improved mobile display
+
+03.04.21:
+- Added the app to my website!
+
+03.07.21:
+- Fit Games and Game to mobile display
+- Fit Loading to mobile display
+- Moved Search label above input
+- Improved game info on mobile display
+- Made explainer link more visible
+- Removed 'Searched' from 'Searched Games + Mechanics'
+- Changed headings/title from near-black to black
+- Added social media sharing tags
+- Made better Board Game Scout sharing image
+- Fixed Explainer mobile display

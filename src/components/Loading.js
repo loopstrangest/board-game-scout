@@ -34,12 +34,13 @@ const Loading = () => {
 
 const StyledLoading = styled(motion.div)`
   justify-content: center;
-  width: 300px;
+  width: 240px;
   display: flex;
   margin: auto;
   text-align: center;
   p {
     margin: auto;
+    width: min-content;
   }
   .lds-grid {
     display: inline-block;
