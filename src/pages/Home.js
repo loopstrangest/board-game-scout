@@ -71,7 +71,7 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   .question {
-    opacity: 25%;
+    opacity: 33%;
     height: 50px;
     position: absolute;
     right: 10px;

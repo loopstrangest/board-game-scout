@@ -22,8 +22,8 @@ const Explainer = () => {
     <ExplainerShadow onClick={toggleExplainer}>
       <Information>
         <p>
-          Board Game Scout helps you find board games that are similar to games
-          you already know and love.
+          Board Game Scout helps you discover board games that are similar to
+          games you know and love.
         </p>
         <p>
           Select any number of games and/or game mechanics and click 'Search' to
@@ -47,6 +47,11 @@ const Explainer = () => {
             <u>Board Game Atlas</u>
           </a>{" "}
           for providing the game data.
+        </p>
+        <hr />
+        <p class="aboutMe">
+          Board Game Scout is made by Loopy, a web developer actively seeking
+          work opportunities.
         </p>
         <div className="links">
           <a
@@ -104,10 +109,17 @@ const Information = styled(motion.div)`
   p {
     padding: 0.5rem 0rem;
   }
-  .links {
-    margin-top: 0.5rem;
+  hr {
+    margin: 0.5rem 0rem;
+  }
+
+  .links,
+  .aboutMe {
     display: flex;
     justify-content: center;
+  }
+  .links {
+    margin-top: 0.5rem;
     height: 2rem;
   }
   .links a {
