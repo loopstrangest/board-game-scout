@@ -118,6 +118,9 @@ const Information = styled(motion.div)`
     display: flex;
     justify-content: center;
   }
+  .aboutMe {
+    text-align: center;
+  }
   .links {
     margin-top: 0.5rem;
     height: 2rem;
